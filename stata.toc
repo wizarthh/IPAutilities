@@ -1,0 +1,7 @@
+v 1.0.0
+d vsantiagohh@gmail.com
+d https://github.com/Wiz4rt/IPAutilities
+
+d 'IPAutilities': generate democases and more SurveyCTO related utilities
+
+p IPAutilities

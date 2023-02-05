@@ -1,0 +1,9 @@
+v 1.0.0
+d 'IPAutilities': a general-purpose SurveyCTO formatting package
+d 
+d generate democases and more SurveyCTO related formats
+d 
+d Distribution-Date:   20230204
+d 
+F democases.ado
+F democases.sthlp
