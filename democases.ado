@@ -223,12 +223,12 @@ forvalues id = 1001/`obstot' {
 	}
 	}
 
-if `numobs' < 6 {
+if `numobs' < 12 {
 	local a = `numobs'
 }
 
 else {
-	local a = 6
+	local a = 12
 }
 
 gen nomb_1 = ""
