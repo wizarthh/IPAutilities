@@ -234,7 +234,7 @@ else {
 gen nomb_1 = ""
 generate rannum = uniform()
 egen grp2 = cut(rannum), group(`a')
-	local nomb `" "Rosa" "Marco" "ADRIAN" "Kelly" "Guillermo" "Víctor" "'
+	local nomb `" "Rosa" "Marco" "ADRIAN" "Kelly" "Guillermo" "Víctor" "Nicolas" "Ursula" "Aurora" "Braulio" "Jose" "Juan" "'
 	local cont = 0
 	foreach v of local nomb{
 		
@@ -247,7 +247,7 @@ drop rannum grp2
 gen apelli_1 = ""
 generate rannum = uniform()
 egen grp2 = cut(rannum), group(`a')
-	local nomb `" "Rojas" "Condor" "Montalvo" "Herencia" "Monzón" "Pantoja" "'
+	local nomb `" "Rojas" "Condor" "Montaño" "Herencia" "Monzón" "Pantoja" "Arteaga" "Delgado" "Condori" "Huamani" "Ruiz" "Miranda" "'
 	local cont = 0
 	foreach v of local nomb{
 		
