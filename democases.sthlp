@@ -2,16 +2,15 @@
 {it:version 1.0} 
 
 
-{title:XXX}
+{title:democases}
 
 {p 4 4 2}
-explain the XXX command briefly...
+This command generates N demo cases for a specified "cases.csv" for SurveyCTO. 
 
 
 {title:Syntax}
 
-{p 8 8 2} {bf:XXX} {it:varlist} ={it:exp} [{it:if}] [{it:in}] 
-[{it:weight}] using {it:filename} [, {it:options}]
+{p 8 8 2} {bf:democases} {it:filename} {it:numobs} {it:formname} 
 
 {col 5}{it:option}{col 24}{it:Description}
 {space 4}{hline 44}
@@ -23,54 +22,36 @@ explain the XXX command briefly...
 {title:Description}
 
 {p 4 4 2}
-describe {bf:XXX} in more details ...
+{bf:democases} is used to create N new false cases starting by the ID 10001, to be used in enumerator training or testing. Democases requires you to specify a .csv file so that the demo cases are created using the format of the .csv you are trying to test. It only generates ID, ID label, phones and interviewee_name, so it's use with {bf:assignusers} is recommended for completing a cases csv.
 
 
 {title:Options}
 
 {p 4 4 2}
-describe the options in details, if the options table is not enough
-
+none at the moment. {break}
+Comment: Maybe could include the options to specify variable names or number of phones.
 
 {title:Remarks}
 
 {p 4 4 2}
-discuss the technical details about {bf:XXX}, if there is any
+discuss the technical details about  {bf:XXX}, if there is any
 
 
 {title:Example(s)}
 
-    explain what it does
+    To create 200 demo cases for the "demo_form" form ID using a "cases.csv" in your working directory you should type:
 
-        . XXX example command
+        . democases "cases.csv" 200 "demo_form"
 
-    second explanation
+    If the cases file isn't on your working directory, you could specify it's location using the following format:
 
-        . XXX example command
+        . democases "X:\local\cases.csv" 500 "demo_form"
 
 
 {title:Stored results}
 
 {p 4 4 2}
-describe the Scalars, Matrices, Macros, stored by {bf:XXX}, for example:
-
-{p 4 4 2}{bf:Scalars}
-
-{p 8 8 2} {bf:r(level)}: explain what the scalar does 
-
-{p 4 4 2}{bf:Matrices}
-
-{p 8 8 2} {bf:r(table)}: explain what it includes
-
-{p 4 4 2}
-Functions
-
-
-{title:Acknowledgements}
-
-{p 4 4 2}
-If you have thanks specific to this command, put them here.
-
+The resulting demo cases should be stored in Stata's memory, so that you can proceed to assing user names or export the cases file as is. 
 
 {title:Author}
 
@@ -78,26 +59,9 @@ If you have thanks specific to this command, put them here.
 leave 2 white spaces at the end of each line for line break. For example:
 
 {p 4 4 2}
-Your Name     {break}
-Your affiliation      {break}
-Your email address, etc.      {break}
+Victor Herencia     {break}
+IPA      {break}
+vherencia@poverty-action.org      {break}
 
-
-{title:License}
-
-{p 4 4 2}
-Specify the license of the software
-
-
-{title:References}
-
-{p 4 4 2}
-Author Name (year),  {browse "https://github.com/haghish/markdoc/":title & external link}
-
-{space 4}{hline}
-
-{p 4 4 2}
-This help file was dynamically produced by 
-{browse "http://www.haghish.com/markdoc/":MarkDoc Literate Programming package} 
 
 
