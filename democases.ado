@@ -1,185 +1,67 @@
 /***
 _version 1.0_ 
 
-XXX
+democases
 ===== 
 
-explain the XXX command briefly...
+This command generates N demo cases for a specified "cases.csv" for SurveyCTO. 
 
 Syntax
 ------ 
 
-> __XXX__ _varlist_ =_exp_ [_if_] [_in_] 
-[_weight_] using _filename_ [, _options_]
+> democases _filename_ _numobs_ _formname_
 
-| _option_          |  _Description_          |
-|:------------------|:------------------------|
-| **em**phasize     | explain whatever does   |
-| **opt**ion(_arg_) | explain whatever does   |
-
+Using _filename_, set _numobs_ new democases, wich take _formname_ as its formid.
 
 Description
 -----------
 
-describe __XXX__ in more details ...
+*democases* is used to create N new false cases starting by the ID 10001, to be used in enumerator training or testing. Democases requires you to specify a .csv file so that the demo cases are created using the format of the .csv you are trying to test. It only generates ID, ID label, phones and interviewee_name, so it's use with *assignusers* is recommended for completing a cases csv.
 
 Options
 -------
-
-describe the options in details, if the options table is not enough
+none at the moment.
+Comment: Maybe could include the options to specify variable names or number of phones.
 
 Remarks
 -------
 
-discuss the technical details about __XXX__, if there is any
+__democases__ relies on the cases file being a .csv for SurveyCTO and containg the following variables:
+
+	- id: First variable of the data set.
+	- label: string variable for the ID, _democases_ uses the following format: "ID XXXXXX"
+	- formids: string variable that contains the form's name.
+	- phone_1 - phone_4: Numeric variables that will contain the fake numbers created by _democases_ 
+	- contacts: numeric variable that stores the total number of phones a case has.
+	- interviewee_name: String variable containing the name of the interviewee.
+	
+If all of this variables exist within the .csv file and belong to the specified types, democases should work perfectly. If an error where to arise it could be because of a type mismatch between one of this variables.
 
 Example(s)
 ----------
 
-    explain what it does
+    To create 200 demo cases for the "demo_form" form ID using a "cases.csv" in your working directory you should type:
 
-        . XXX example command
+        . democases "cases.csv" 200 "demo_form"
 
-    second explanation
+    If the cases file isn't on your working directory, you could specify it's location using the following format:
 
-        . XXX example command
-
-Stored results
---------------
-
-describe the Scalars, Matrices, Macros, stored by __XXX__, for example:
-
-### Scalars
-
-> __r(level)__: explain what the scalar does 
-
-### Matrices
-
-> __r(table)__: explain what it includes
-
-Functions
-
-Acknowledgements
-----------------
-
-If you have thanks specific to this command, put them here.
-
-Author
-------
-
-leave 2 white spaces at the end of each line for line break. For example:
-
-Your Name   
-Your affiliation    
-Your email address, etc.    
-
-License
--------
-
-Specify the license of the software
-
-References
-----------
-
-Author Name (year), [title & external link](https://github.com/haghish/markdoc/)
-
-- - -
-
-This help file was dynamically produced by 
-[MarkDoc Literate Programming package](http://www.haghish.com/markdoc/) 
-***/
-
-
-
-/***
-_version 1.0_ 
-
-XXX
-===== 
-
-explain the XXX command briefly...
-
-Syntax
------- 
-
-> __XXX__ _varlist_ =_exp_ [_if_] [_in_] 
-[_weight_] using _filename_ [, _options_]
-
-| _option_          |  _Description_          |
-|:------------------|:------------------------|
-| **em**phasize     | explain whatever does   |
-| **opt**ion(_arg_) | explain whatever does   |
-
-
-Description
------------
-
-describe __XXX__ in more details ...
-
-Options
--------
-
-describe the options in details, if the options table is not enough
-
-Remarks
--------
-
-discuss the technical details about __XXX__, if there is any
-
-Example(s)
-----------
-
-    explain what it does
-
-        . XXX example command
-
-    second explanation
-
-        . XXX example command
+        . democases "X:\local\cases.csv" 500 "demo_form"
 
 Stored results
 --------------
 
-describe the Scalars, Matrices, Macros, stored by __XXX__, for example:
-
-### Scalars
-
-> __r(level)__: explain what the scalar does 
-
-### Matrices
-
-> __r(table)__: explain what it includes
-
-Functions
-
-Acknowledgements
-----------------
-
-If you have thanks specific to this command, put them here.
+The resulting demo cases should be stored in Stata's memory, so that you can proceed to assing user names or export the cases file as is. 
 
 Author
 ------
 
-leave 2 white spaces at the end of each line for line break. For example:
-
-Your Name   
-Your affiliation    
-Your email address, etc.    
-
-License
--------
-
-Specify the license of the software
-
-References
-----------
-
-Author Name (year), [title & external link](https://github.com/haghish/markdoc/)
+Victor Herencia   
+IPA    
+vherencia@poverty-action.org    
 
 - - -
 
-This help file was dynamically produced by 
-[MarkDoc Literate Programming package](http://www.haghish.com/markdoc/) 
 ***/
 
 
@@ -190,7 +72,7 @@ program define democases
 	local numobs `2'
     local formname `3'
 	
-	import delimited using "`docuname'", clear
+	import delimited using "`docuname'", clear numericcols(1)
 
 drop if _n >= 1
 
