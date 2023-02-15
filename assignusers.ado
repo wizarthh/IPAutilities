@@ -36,7 +36,7 @@ foreach v of local newcountlist {
 	local count = `count' + 1
 	local newuser: word `count' of `nombres'
 	
-	local newuser = ustrupper(ustrregexra( ustrnormalize( "`newuser'", "nfd" ) , "\p{Mark}", "" ) )
+	local newuser = ustrlower(ustrregexra( ustrnormalize( "`newuser'", "nfd" ) , "\p{Mark}", "" ) )
 	local inicial = substr("`newuser'", 1, `v')
     local pos = strpos("`newuser'", " ") + 1
     local name = substr("`newuser'", `pos', .)
