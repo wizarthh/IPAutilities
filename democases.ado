@@ -78,7 +78,7 @@ drop if _n >= 1
 
 set obs `numobs'
 
-replace id = 10000 + _n
+replace id = 1000000 + _n
 
 gen b_label = "ID"
 
@@ -89,9 +89,9 @@ drop a_label b_label
 replace formids = "`formname'"
 
 local nums 11111111 22222222 33333333 44444444
-local obstot = 10000 + _N
+local obstot = 1000000 + _N
 
-forvalues id = 1001/`obstot' {
+forvalues id = 1000001/`obstot' {
 	local a = 4*runiform() + 1
 	local cont = 1
 	foreach v of local nums{
