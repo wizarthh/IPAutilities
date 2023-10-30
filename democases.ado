@@ -1,5 +1,5 @@
 /***
-_version 1.0_ 
+_version 1.1_ 
 
 democases
 ===== 
@@ -68,25 +68,46 @@ vherencia@poverty-action.org
 
 
 program define democases
-    local docuname `1'
+	local docuname `1'
 	local numobs `2'
-    local formname `3'
+	local formname `3'
+	local name_fields `4'
 	
 	import delimited using "`docuname'", clear numericcols(1)
 
 drop if _n >= 1
 
-set obs `numobs'
+local counter = 0
+foreach v of local formname {
+	local counter = `counter' + 1
+}
 
-replace id = 1000000 + _n
+local newobs = `numobs' * `counter'
 
-gen b_label = "ID"
+set obs `newobs'
+
+replace id = 100000 + _n
+
+gen b_label = "Joven"
+gen cg_label = "Cuidador"
 
 egen a_label = concat(b_label id), punct(" ") 
-replace label = a_label
-drop a_label b_label
+egen c_label = concat(cg_label id), punct(" ") 
+replace label = a_label if _n <= `numobs'
+replace label = c_label if _n > `numobs'
 
-replace formids = "`formname'"
+drop a_label b_label c_label cg_label
+
+
+local rel1 = "<="
+local rel2 = ">"
+
+local counter = 0
+foreach v of local formname {
+local counter = `counter' + 1
+replace formids = "`v'" if _n `rel`counter'' `numobs'
+
+}
 
 local nums 11111111 22222222 33333333 44444444
 local obstot = 1000000 + _N
@@ -105,6 +126,10 @@ forvalues id = 1000001/`obstot' {
 	}
 	}
 
+forval i = 1/4 {
+	format phone_`i' %12.0g
+}
+
 if `numobs' < 12 {
 	local a = `numobs'
 }
@@ -113,10 +138,11 @@ else {
 	local a = 12
 }
 
-gen nomb_1 = ""
+foreach fieldd of local name_fields{
+	gen nomb_1 = ""
 generate rannum = uniform()
 egen grp2 = cut(rannum), group(`a')
-	local nomb `" "Rosa" "Marco" "ADRIAN" "Kelly" "Guillermo" "Víctor" "Nicolas" "Ursula" "Aurora" "Braulio" "Jose" "Juan" "'
+	local nomb `" "Rosa" "Marco" "Adrian" "Kelly" "Guillermo" "Andrea" "Josue" "Victor" "Nicolas" "Ursula" "Aurora" "Braulio" "Jose" "Juan" "'
 	local cont = 0
 	foreach v of local nomb{
 		
@@ -129,7 +155,7 @@ drop rannum grp2
 gen apelli_1 = ""
 generate rannum = uniform()
 egen grp2 = cut(rannum), group(`a')
-	local nomb `" "Rojas" "Condor" "Montaño" "Herencia" "Monzón" "Pantoja" "Arteaga" "Delgado" "Condori" "Huamani" "Ruiz" "Miranda" "'
+	local nomb `" "Rojas" "Condor" "Montaño" "Herencia" "Monzón" "Clavo" "Benitez" "Pantoja" "Arteaga" "Delgado" "Condori" "Huamani" "Ruiz" "Miranda" "'
 	local cont = 0
 	foreach v of local nomb{
 		
@@ -140,12 +166,21 @@ egen grp2 = cut(rannum), group(`a')
 drop rannum grp2
 
 egen a_label = concat(nomb_1 apelli_1), punct(" ")
-replace interviewee_name = a_label
+replace `fieldd' = a_label
 
 drop a_label nomb_1 apelli_1
 
 	
-replace interviewee_name = ustrregexra(strupper( ustrregexra( ustrnormalize(trim(itrim(interviewee_name)), "nfd" ) , "\p{Mark}", "" ) ), "[^A-Z \s]", "")
+replace `fieldd' = ustrregexra(strupper( ustrregexra( ustrnormalize(trim(itrim(`fieldd')), "nfd" ) , "\p{Mark}", "" ) ), "[^A-Z \s]", "")
+}
+
+gen a_edad = runiformint(13,19)
+gen cg_edad = runiformint(4,6)
+
+replace edad_participante = a_edad if _n <= `numobs'
+replace edad_participante = cg_edad if _n > `numobs'
+
+drop a_edad cg_edad
 
 egen a_contacts = rownonmiss(phone_?)
 replace contacts = a_contacts
