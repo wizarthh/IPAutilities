@@ -110,9 +110,9 @@ replace formids = "`v'" if _n `rel`counter'' `numobs'
 }
 
 local nums 11111111 22222222 33333333 44444444
-local obstot = 1000000 + _N
+local obstot = 100000 + _N
 
-forvalues id = 1000001/`obstot' {
+forvalues id = 100001/`obstot' {
 	local a = 4*runiform() + 1
 	local cont = 1
 	foreach v of local nums{
@@ -142,7 +142,7 @@ foreach fieldd of local name_fields{
 	gen nomb_1 = ""
 generate rannum = uniform()
 egen grp2 = cut(rannum), group(`a')
-	local nomb `" "Rosa" "Marco" "Adrian" "Kelly" "Guillermo" "Andrea" "Josue" "Victor" "Nicolas" "Ursula" "Aurora" "Braulio" "Jose" "Juan" "'
+	local nomb `" "Rosa" "Marco" "Darwin" "Adrian" "Kelly" "Guillermo" "Andrea" "Josue" "Renzo" "Diego" "Emily" "Alexandra" "Diana" "Victor" "Nicolas" "Ursula" "Aurora" "Braulio" "Jose" "Juan" "'
 	local cont = 0
 	foreach v of local nomb{
 		
@@ -155,7 +155,7 @@ drop rannum grp2
 gen apelli_1 = ""
 generate rannum = uniform()
 egen grp2 = cut(rannum), group(`a')
-	local nomb `" "Rojas" "Condor" "Montaño" "Herencia" "Monzón" "Clavo" "Benitez" "Pantoja" "Arteaga" "Delgado" "Condori" "Huamani" "Ruiz" "Miranda" "'
+	local nomb `" "Rojas" "Condor" "Montaño" "Herencia" "Monzón" "Clavo" "Saavedra" "Torres" "Otero" "Arteaga" "Benitez" "Pantoja" "Arteaga" "Delgado" "Condori" "Huamani" "Ruiz" "Miranda" "'
 	local cont = 0
 	foreach v of local nomb{
 		
